@@ -58,50 +58,143 @@ Notable design patterns:
 
 ## Setup
 
-### Prerequisites
+### 1. Install PostgreSQL
 
-- Python 3.12+
-- PostgreSQL running on `localhost:5432`
-
-### Install
-
+**macOS (Homebrew)**
 ```bash
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+brew install postgresql@16
+brew services start postgresql@16
 
-# Install dependencies
-pip install -r requirements.txt
+# Add to PATH (add this line to ~/.zshrc or ~/.bash_profile)
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 ```
 
-### Database
-
+**Ubuntu / Debian**
 ```bash
-# Create the database
-createdb travel_agency
-
-# Apply schema
-psql -U postgres -d travel_agency -f schema.sql
-
-# Seed with sample data (~50 rows per table, deterministic seed)
-python seed_data.py
+sudo apt update
+sudo apt install -y postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
 ```
 
-The database connection is configured in both `app.py` and `seed_data.py`:
+**Windows**
+
+1. Download the installer from [postgresql.org/download/windows](https://www.postgresql.org/download/windows)
+2. Run the installer — keep the default port `5432` and set a password for the `postgres` user
+3. When prompted, install **pgAdmin** and **Command Line Tools** (both checked by default)
+4. Add PostgreSQL to your PATH so `psql` works from any terminal:
+   - Search **Environment Variables** in the Start menu → **Edit the system environment variables**
+   - Under **System variables**, find `Path` → **Edit** → **New**
+   - Add: `C:\Program Files\PostgreSQL\16\bin` (adjust version number if different)
+   - Click OK and restart your terminal
+
+Verify it works by opening **Command Prompt** or **PowerShell**:
+```powershell
+psql -U postgres -c "SELECT version();"
+```
+
+---
+
+### 2. Create the database
+
+**macOS / Linux**
+```bash
+psql -U postgres -c "CREATE DATABASE travel_agency;"
+```
+
+**Windows (Command Prompt / PowerShell)**
+```powershell
+psql -U postgres -c "CREATE DATABASE travel_agency;"
+```
+
+> On Linux you may need to prefix with `sudo -u postgres` — e.g. `sudo -u postgres psql`.
+
+Verify the connection works:
+
+**macOS / Linux**
+```bash
+psql -U postgres -d travel_agency -c "SELECT version();"
+```
+
+**Windows**
+```powershell
+psql -U postgres -d travel_agency -c "SELECT version();"
+```
+
+---
+
+### 3. Configure the connection
+
+The connection is set in both `app.py` and `seed_data.py`. The defaults work out of the box if you used `postgres` as the username and password during installation:
 
 ```python
 DB_CONFIG = {
     "dbname": "travel_agency",
     "user": "postgres",
-    "password": "postgres",
+    "password": "postgres",   # change if you set a different password
     "host": "localhost",
     "port": 5432,
 }
 ```
 
-### Run
+If your password differs, update the `password` field in both files before proceeding.
 
+---
+
+### 4. Install Python dependencies
+
+**macOS / Linux**
 ```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Windows (Command Prompt)**
+```cmd
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+**Windows (PowerShell)**
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+> If PowerShell blocks the activation script, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once first.
+
+---
+
+### 5. Apply schema and seed data
+
+**macOS / Linux**
+```bash
+psql -U postgres -d travel_agency -f schema.sql
+python seed_data.py
+```
+
+**Windows**
+```powershell
+psql -U postgres -d travel_agency -f schema.sql
+python seed_data.py
+```
+
+Re-running `seed_data.py` at any time truncates and regenerates all data from scratch.
+
+---
+
+### 6. Run the app
+
+**macOS / Linux**
+```bash
+python app.py
+```
+
+**Windows**
+```powershell
 python app.py
 ```
 
