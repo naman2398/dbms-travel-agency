@@ -1,0 +1,191 @@
+      city      |  country  | total_trips | total_revenue 
+----------------+-----------+-------------+---------------
+ Rio de Janeiro | Brazil    |           3 |      17507.08
+ Mexico City    | Mexico    |           2 |      16645.73
+ Hong Kong      | China     |           2 |      14809.20
+ Los Angeles    | USA       |           1 |      11820.78
+ Bali           | Indonesia |           2 |      10668.48
+(5 rows)
+
+ passenger_id |       name        | trip_count | total_spent 
+--------------+-------------------+------------+-------------
+           20 | Jennifer Ramirez  |          7 |    40620.98
+           26 | George Orozco     |          5 |    30547.51
+           46 | Frank Lopez       |          7 |    27938.22
+           10 | Michael Brown     |          4 |    23591.82
+           19 | Vanessa Cochran   |          6 |    23264.82
+           49 | Rebecca Jackson   |          5 |    21925.09
+           47 | Jessica Fox       |          5 |    21772.99
+            6 | Zachary Hicks     |          4 |    20110.98
+           16 | Gregory Jones     |          3 |    19886.43
+           48 | Cynthia Cohen     |          4 |    19568.83
+           38 | Jamie Kerr        |          3 |    19286.59
+            8 | Brian Cox DVM     |          3 |    17565.87
+           50 | Megan Moore       |          5 |    17498.25
+           36 | Elizabeth Ward    |          5 |    17041.87
+           28 | George Shelton    |          3 |    16532.77
+           41 | Michael Valencia  |          3 |    16356.41
+            9 | Tanya Campos      |          5 |    15168.86
+           42 | Julie Ortiz       |          4 |    13326.59
+           29 | Daniel Murphy     |          3 |    12267.13
+            3 | Kimberly Dudley   |          4 |    11847.77
+           34 | Nathan Freeman    |          7 |    11630.07
+            4 | Holly Wood        |          5 |     9697.06
+           33 | John Bishop       |          4 |     9332.99
+           31 | Miguel Jones      |          3 |     9098.29
+           30 | Alex Hernandez    |          4 |     8274.68
+           60 | Kerry Chavez DDS  |          3 |     6726.36
+           12 | Joel Baxter       |          3 |     5883.03
+            7 | Gina Carter       |          4 |     5507.63
+           25 | Victoria Larson   |          3 |     4979.17
+           35 | Krista Bell MD    |          3 |     3840.47
+           55 | Elizabeth Vasquez |          3 |     3346.66
+           24 | Mark Lee          |          3 |      989.24
+(32 rows)
+
+ accommodation_id |     name     |  type  |   city   | avg_rating | review_count 
+------------------+--------------+--------+----------+------------+--------------
+                1 | Moore Suites | Motel  | Honolulu |       3.60 |            5
+               28 | Conner Inn   | Resort | Miami    |       3.33 |            3
+(2 rows)
+
+ level | employee_id |         name         |       role       |                 path                  
+-------+-------------+----------------------+------------------+---------------------------------------
+     1 |           4 | Erin Martinez        | Director         | Erin Martinez
+     1 |           1 | Jacqueline Hernandez | Manager          | Jacqueline Hernandez
+     1 |           5 | Nicole Parrish       | Director         | Nicole Parrish
+     1 |           3 | Robin Hawkins        | Manager          | Robin Hawkins
+     1 |           2 | Ronald Davis         | Director         | Ronald Davis
+     2 |          25 | Albert Morse         | Senior Agent     | Jacqueline Hernandez > Albert Morse
+     2 |          27 | Alex Nguyen          | Senior Agent     | Ronald Davis > Alex Nguyen
+     2 |          20 | Amber Foster         | Customer Support | Ronald Davis > Amber Foster
+     2 |          16 | Angela Williams      | Customer Support | Ronald Davis > Angela Williams
+     2 |          29 | Dana Chapman         | Customer Support | Jacqueline Hernandez > Dana Chapman
+     2 |          11 | Debra White          | Senior Agent     | Robin Hawkins > Debra White
+     2 |          19 | Douglas Gregory      | Customer Support | Nicole Parrish > Douglas Gregory
+     2 |          21 | Eric Clark           | Travel Agent     | Robin Hawkins > Eric Clark
+     2 |          30 | Eric Morgan          | Travel Agent     | Erin Martinez > Eric Morgan
+     2 |          22 | Garrett Smith        | Travel Agent     | Nicole Parrish > Garrett Smith
+     2 |          12 | Gerald Smith         | Travel Agent     | Robin Hawkins > Gerald Smith
+     2 |           8 | Holly Farmer         | Customer Support | Jacqueline Hernandez > Holly Farmer
+     2 |          15 | Jacob Griffith       | Customer Support | Robin Hawkins > Jacob Griffith
+     2 |          23 | James Padilla        | Customer Support | Jacqueline Hernandez > James Padilla
+     2 |          13 | Jennifer Thomas      | Senior Agent     | Ronald Davis > Jennifer Thomas
+     2 |          26 | Laura Mckinney       | Travel Agent     | Robin Hawkins > Laura Mckinney
+     2 |           6 | Lindsay Bell         | Customer Support | Erin Martinez > Lindsay Bell
+     2 |          10 | Maria Johnson        | Customer Support | Nicole Parrish > Maria Johnson
+     2 |           7 | Matthew Walker       | Customer Support | Robin Hawkins > Matthew Walker
+     2 |          17 | Megan Nelson         | Customer Support | Jacqueline Hernandez > Megan Nelson
+     2 |          18 | Mr. Donald Fischer   | Customer Support | Robin Hawkins > Mr. Donald Fischer
+     2 |          14 | Paul Lewis           | Senior Agent     | Jacqueline Hernandez > Paul Lewis
+     2 |          24 | Renee Jones          | Customer Support | Robin Hawkins > Renee Jones
+     2 |          28 | Sandra Gillespie     | Travel Agent     | Ronald Davis > Sandra Gillespie
+     2 |           9 | Sarah Villegas       | Customer Support | Jacqueline Hernandez > Sarah Villegas
+(30 rows)
+
+    country     | activity_type | bookings 
+----------------+---------------+----------
+ Australia      | Wildlife      |        4
+ Brazil         | Adventure     |        1
+ Canada         | Cultural      |        5
+ China          | Food & Drink  |        2
+ Czech Republic | Wildlife      |        4
+ Indonesia      | Food & Drink  |        1
+ Mexico         | Water Sport   |        2
+ Netherlands    | Adventure     |        4
+ New Zealand    | Cultural      |        1
+ Portugal       | Wildlife      |        2
+ Singapore      | Cultural      |        2
+ South Africa   | Cultural      |        1
+ Thailand       | Adventure     |        1
+ Turkey         | Water Sport   |        2
+ USA            | Water Sport   |       10
+(15 rows)
+
+ group_id |     purpose     | start_date |      accommodation_cost      | total_paid |          shortfall           
+----------+-----------------+------------+------------------------------+------------+------------------------------
+       19 | Leisure         | 2026-07-01 | 41167.3163310000000000000000 |          0 | 41167.3163310000000000000000
+       38 | Business        | 2026-04-13 | 40817.4369750000000000000000 |    8038.66 | 32778.7769750000000000000000
+       37 | Leisure         | 2026-05-10 | 30175.6077360000000000000000 |          0 | 30175.6077360000000000000000
+       36 | Family Vacation | 2026-07-27 | 31902.5380500000000000000000 |    2696.96 | 29205.5780500000000000000000
+       18 | Business        | 2026-06-25 | 29754.4567800000000000000000 |    2725.12 | 27029.3367800000000000000000
+        1 | Business        | 2026-07-22 | 26512.3558400000000000000000 |    1171.73 | 25340.6258400000000000000000
+       34 | Family Vacation | 2026-04-26 | 26646.4188000000000000000000 |    1661.80 | 24984.6188000000000000000000
+       24 | Business        | 2026-04-06 | 23167.7813220000000000000000 |     396.21 | 22771.5713220000000000000000
+       11 | Adventure       | 2026-03-07 | 21470.2301280000000000000000 |     785.80 | 20684.4301280000000000000000
+       33 | Conference      | 2026-07-05 | 17658.2962380000000000000000 |          0 | 17658.2962380000000000000000
+       20 | Conference      | 2026-03-26 | 24391.6848000000000000000000 |    7619.30 | 16772.3848000000000000000000
+        3 | Conference      | 2026-04-04 | 16779.7422000000000000000000 |     558.15 | 16221.5922000000000000000000
+       40 | Leisure         | 2026-05-20 | 20010.6103140000000000000000 |    3853.66 | 16156.9503140000000000000000
+       35 | Leisure         | 2026-07-22 | 14190.9087600000000000000000 |          0 | 14190.9087600000000000000000
+        8 | Conference      | 2026-06-25 | 13700.5666560000000000000000 |          0 | 13700.5666560000000000000000
+       17 | Conference      | 2026-07-04 | 17249.8017720000000000000000 |    3840.47 | 13409.3317720000000000000000
+       12 | Conference      | 2026-04-21 | 17255.3849480000000000000000 |    4421.02 | 12834.3649480000000000000000
+        5 | Adventure       | 2026-03-13 | 11417.1388800000000000000000 |          0 | 11417.1388800000000000000000
+       39 | Honeymoon       | 2026-04-28 | 15225.3396600000000000000000 |    6447.24 |  8778.0996600000000000000000
+       28 | Business        | 2026-05-08 | 10392.9062400000000000000000 |    2706.47 |  7686.4362400000000000000000
+       15 | Conference      | 2026-04-27 | 14798.0894880000000000000000 |    7829.49 |  6968.5994880000000000000000
+       22 | Leisure         | 2026-05-02 |  9379.4371650000000000000000 |    2872.70 |  6506.7371650000000000000000
+       23 | Conference      | 2026-06-11 |  5079.9066240000000000000000 |    1409.89 |  3670.0166240000000000000000
+       26 | Wedding         | 2026-04-13 |  8120.1811520000000000000000 |    4942.25 |  3177.9311520000000000000000
+        7 | Wedding         | 2026-03-17 |  5253.9720600000000000000000 |    3010.33 |  2243.6420600000000000000000
+       29 | Leisure         | 2026-05-21 |  2178.6644880000000000000000 |          0 |  2178.6644880000000000000000
+       25 | Leisure         | 2026-05-07 |  6487.7304800000000000000000 |    5192.87 |  1294.8604800000000000000000
+       27 | Wedding         | 2026-06-22 |  1647.6775920000000000000000 |     989.24 |   658.4375920000000000000000
+(28 rows)
+
+ passenger_id |        name        |           email            
+--------------+--------------------+----------------------------
+           46 | Frank Lopez        | ashleyhall@example.com
+            4 | Holly Wood         | elizabethmiles@example.net
+           47 | Jessica Fox        | jsmith@example.com
+           42 | Julie Ortiz        | elizabeth25@example.com
+            3 | Kimberly Dudley    | smiller@example.net
+           43 | Kimberly Gutierrez | aprildean@example.com
+           34 | Nathan Freeman     | hannahbrewer@example.com
+(7 rows)
+
+   month    | monthly_revenue | running_total 
+------------+-----------------+---------------
+ 2026-02-01 |        32780.24 |      32780.24
+ 2026-03-01 |        55197.65 |      87977.89
+ 2026-04-01 |        70374.69 |     158352.58
+ 2026-05-01 |         3010.33 |     161362.91
+(4 rows)
+
+         source         |       destination       | num_flights | avg_fare 
+------------------------+-------------------------+-------------+----------
+ Lisbon, Portugal       | Berlin, Germany         |           1 |    96.15
+ Berlin, Germany        | Rome, Italy             |           1 |    97.63
+ Las Vegas, USA         | Miami, USA              |           1 |   181.43
+ Athens, Greece         | Auckland, New Zealand   |           1 |   232.11
+ Seoul, South Korea     | Honolulu, USA           |           1 |   365.08
+ Barcelona, Spain       | Tokyo, Japan            |           1 |   567.95
+ Boston, USA            | Lisbon, Portugal        |           1 |   653.11
+ Seattle, USA           | Dubai, UAE              |           1 |   875.98
+ Singapore, Singapore   | Rio de Janeiro, Brazil  |           1 |   888.08
+ Lisbon, Portugal       | Athens, Greece          |           1 |   888.28
+ Singapore, Singapore   | Athens, Greece          |           1 |   904.46
+ Bali, Indonesia        | Amsterdam, Netherlands  |           1 |   914.10
+ Amsterdam, Netherlands | Rome, Italy             |           1 |  1095.76
+ Boston, USA            | Vienna, Austria         |           1 |  1182.15
+ Las Vegas, USA         | Seoul, South Korea      |           1 |  1197.20
+ Las Vegas, USA         | New York, USA           |           1 |  1261.26
+ Las Vegas, USA         | Prague, Czech Republic  |           1 |  1300.89
+ Vancouver, Canada      | Honolulu, USA           |           1 |  1336.51
+ Bangkok, Thailand      | Barcelona, Spain        |           1 |  1350.52
+ Athens, Greece         | Buenos Aires, Argentina |           1 |  1449.34
+ Bali, Indonesia        | Delhi, India            |           1 |  1450.77
+ Denver, USA            | New York, USA           |           1 |  1567.92
+ Paris, France          | Seoul, South Korea      |           1 |  1614.36
+ Seattle, USA           | Hong Kong, China        |           1 |  1724.26
+ Honolulu, USA          | Vienna, Austria         |           1 |  1784.94
+ Mumbai, India          | Singapore, Singapore    |           1 |  1804.25
+ Vancouver, Canada      | New York, USA           |           1 |  1856.42
+(27 rows)
+
+ group_id | purpose  | start_date |  end_date  |                 passengers                 |                   transports                   |          hotels          |          activities           
+----------+----------+------------+------------+--------------------------------------------+------------------------------------------------+--------------------------+-------------------------------
+        1 | Business | 2026-07-22 | 2026-08-11 | George Shelton, Gina Carter, Zachary Hicks | Bus (841.85); Cruise (308.29); Flight (875.98) | Conner Inn; Myers Suites | Helicopter Tour, Wine Tasting
+(1 row)
+

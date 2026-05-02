@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Travel Agency{% endblock %}</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@400;600;700&display=swap");
+
+    :root {
+      --ink: #1c1b1a;
+      --muted: #615d57;
+      --paper: #fbf7f0;
+      --surface: #fff;
+      --accent: #a43d2d;
+      --accent-2: #0f6670;
+      --accent-3: #f1c27b;
+      --border: rgba(28, 27, 26, 0.12);
+      --shadow: 0 20px 50px rgba(28, 27, 26, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at 10% 10%, #fbe6d2 0%, transparent 40%),
+                  radial-gradient(circle at 90% 20%, #d9f2f1 0%, transparent 45%),
+                  radial-gradient(circle at 50% 90%, #fff5df 0%, transparent 45%),
+                  var(--paper);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(164, 61, 45, 0.08), rgba(15, 102, 112, 0.08));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      padding: 1.5rem 2.5rem;
+    }
+
+    header .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    header h1 a {
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    header nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 600;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    header nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2.5rem 2rem;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, rgba(164, 61, 45, 0.9), rgba(15, 102, 112, 0.85));
+      color: #fff;
+      border-radius: 28px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      animation: rise 0.7s ease both;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      right: -80px;
+      bottom: -160px;
+      background: radial-gradient(circle, rgba(241, 194, 123, 0.7), transparent 70%);
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.3rem, 3.5vw, 3.2rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      max-width: 520px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 1.8rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(28, 27, 26, 0.08);
+      margin-top: 1.6rem;
+      animation: rise 0.6s ease both;
+    }
+
+    .card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fffdf8;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: rgba(164, 61, 45, 0.6);
+      box-shadow: 0 0 0 3px rgba(164, 61, 45, 0.15);
+    }
+
+    button,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button:hover,
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(164, 61, 45, 0.25);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding: 1.2rem 1.5rem;
+      }
+
+      header .inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      main {
+        padding: 0 1.5rem 2rem;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option {
+      border-radius: 18px;
+      border: 1px solid transparent;
+      padding: 1rem;
+      margin-bottom: 0.9rem;
+      background: #fffdf8;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .option label {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) auto;
+      column-gap: 1rem;
+      margin: 0;
+      align-items: center;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .option label > div {
+      min-width: 0;
+    }
+
+    .option label input {
+      align-self: start;
+      margin-top: 0.2rem;
+    }
+
+    .option:has(input:checked) {
+      border-color: rgba(15, 102, 112, 0.4);
+      box-shadow: 0 12px 30px rgba(15, 102, 112, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--accent-2);
+      font-size: 1.05rem;
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    .browse-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    .flash {
+      padding: 0.9rem 1.2rem;
+      border-radius: 14px;
+      margin: 1rem 0;
+      font-weight: 600;
+      border: 1px solid transparent;
+      animation: rise 0.4s ease both;
+    }
+
+    .flash.success {
+      background: rgba(15, 102, 112, 0.1);
+      border-color: rgba(15, 102, 112, 0.25);
+    }
+
+    .flash.error {
+      background: rgba(164, 61, 45, 0.1);
+      border-color: rgba(164, 61, 45, 0.25);
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      body::before {
+        display: none;
+      }
+
+      header,
+      .hero {
+        box-shadow: none;
+        background: #fff;
+        color: var(--ink);
+      }
+
+      main {
+        max-width: none;
+        margin: 0;
+        padding: 0 1rem 1rem;
+      }
+
+      .card {
+        box-shadow: none;
+        border-color: #ddd;
+        page-break-inside: avoid;
+      }
+
+      .option label {
+        align-items: flex-start;
+      }
+
+      .price {
+        align-self: flex-start;
+      }
+
+      .browse-actions {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      button,
+      .btn {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="inner">
+      <h1><a href="{{ url_for('search') }}">Travel Agency</a></h1>
+      <nav>
+        <a href="{{ url_for('search') }}">Search</a>
+        <a href="{{ url_for('my_bookings') }}">My Bookings</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

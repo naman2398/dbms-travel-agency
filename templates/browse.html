@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Browse Options - Travel Agency{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Trips to {{ dest.city }}{% if dest.country %}, {{ dest.country }}{% endif %}</h2>
+  <p class="meta">{{ search.start_date }} to {{ search.end_date }} · {{ search.size }} traveler(s) · {{ search.purpose }}</p>
+</section>
+
+<form method="POST" action="{{ url_for('plan') }}">
+  <section class="card">
+    <h2>Choose transport</h2>
+    {% if transports %}
+      {% for t in transports %}
+        <div class="option">
+          <label>
+            <input type="radio" name="transport_id" value="{{ t.transportation_id }}" {% if loop.first %}checked{% endif %}>
+            <div style="flex: 1;">
+              <div><strong>{{ t.type }}</strong>
+                {% if t.carrier %} · {{ t.carrier }} {{ t.flight_number }}{% endif %}
+                {% if t.travel_class %} · {{ t.travel_class }}{% endif %}
+              </div>
+              <div class="meta">{{ t.source_city }} to {{ t.dest_city }}
+                {% if t.departure_time %} · {{ t.departure_time.strftime('%b %d, %H:%M') }}{% endif %}
+              </div>
+            </div>
+            <span class="price">${{ "%.2f"|format(t.fare) }}</span>
+          </label>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="meta">No transport options found for this destination.</p>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Choose your stay</h2>
+    {% if hotels %}
+      {% for h in hotels %}
+        <div class="option">
+          <label>
+            <input type="radio" name="hotel_id" value="{{ h.accommodation_id }}" {% if loop.first %}checked{% endif %}>
+            <div style="flex: 1;">
+              <div><strong>{{ h.name }}</strong> · {{ h.type }}</div>
+              <div class="meta">{{ h.facilities }}
+                {% if h.discount_pct and h.discount_pct > 0 %} · <span style="color: var(--accent-2);">{{ h.discount_pct }}% off</span>{% endif %}
+              </div>
+            </div>
+            <span class="price">${{ "%.2f"|format(h.rate_per_night) }}/night</span>
+          </label>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="meta">No hotels found at this destination.</p>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Add activities (optional)</h2>
+    {% if activities %}
+      {% for a in activities %}
+        <div class="option">
+          <label>
+            <input type="checkbox" name="activity_ids" value="{{ a.activity_id }}">
+            <div style="flex: 1;">
+              <div><strong>{{ a.name }}</strong> · {{ a.type }}</div>
+              <div class="meta">{{ a.duration_hours }} hours</div>
+            </div>
+            <span class="price">${{ "%.2f"|format(a.price) }}</span>
+          </label>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="meta">No activities found at this destination.</p>
+    {% endif %}
+
+    <div class="browse-actions">
+      <a href="{{ url_for('search') }}" class="btn btn-secondary">Back</a>
+      <button type="submit">Continue &rarr;</button>
+    </div>
+  </section>
+</form>
+{% endblock %}

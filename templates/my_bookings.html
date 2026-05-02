@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}My Bookings - Travel Agency{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Find my bookings</h2>
+  <form method="GET">
+    <label>Email address</label>
+    <input type="email" name="email" value="{{ email }}" placeholder="you@example.com" required>
+    <div style="margin-top: 1rem; text-align: right;">
+      <button type="submit">Look up</button>
+    </div>
+  </form>
+</section>
+
+{% if email %}
+  <section class="card">
+    <h2>Bookings for {{ email }}</h2>
+    {% if bookings %}
+      <table>
+        <tr>
+          <th>Trip ID</th><th>Route</th><th>Dates</th><th>Purpose</th>
+          <th>Hotels</th><th>Activities</th><th>Paid</th>
+        </tr>
+        {% for b in bookings %}
+          <tr>
+            <td>#{{ b.group_id }}</td>
+            <td>{{ b.source }} to {{ b.destination }}</td>
+            <td>{{ b.start_date }} to {{ b.end_date }}</td>
+            <td>{{ b.purpose }}</td>
+            <td>{{ b.hotels or '-' }}</td>
+            <td>{{ b.activities or '-' }}</td>
+            <td>${{ "%.2f"|format(b.total_paid) }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p class="meta">No bookings found for this email.</p>
+    {% endif %}
+  </section>
+{% endif %}
+{% endblock %}

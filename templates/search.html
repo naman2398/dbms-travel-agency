@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Search Trips - Travel Agency{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Design the trip you want</h1>
+  <p>Search flights, stays, and experiences in one place. Build a plan, then confirm in one smooth flow.</p>
+</section>
+
+<section class="card">
+  <h2>Start with the essentials</h2>
+  <form method="POST">
+    <div class="grid grid-2">
+      <div>
+        <label>From</label>
+        <select name="source_id" required>
+          {% for loc in locations %}
+            <option value="{{ loc.location_id }}">{{ loc.city }}{% if loc.country %}, {{ loc.country }}{% endif %}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div>
+        <label>To</label>
+        <select name="dest_id" required>
+          {% for loc in locations %}
+            <option value="{{ loc.location_id }}">{{ loc.city }}{% if loc.country %}, {{ loc.country }}{% endif %}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <label>Departure</label>
+        <input type="date" name="start_date" required>
+      </div>
+      <div>
+        <label>Return</label>
+        <input type="date" name="end_date" required>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <label>Travelers</label>
+        <input type="number" name="size" min="1" max="20" value="2" required>
+      </div>
+      <div>
+        <label>Trip purpose</label>
+        <select name="purpose">
+          <option>Leisure</option>
+          <option>Business</option>
+          <option>Honeymoon</option>
+          <option>Family Vacation</option>
+          <option>Adventure</option>
+          <option>Conference</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top: 1.6rem; text-align: right;">
+      <button type="submit">Search &rarr;</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Review Trip - Travel Agency{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Review your trip</h2>
+  <p class="meta">{{ search.size }} traveler(s) · {{ search.start_date }} to {{ search.end_date }}</p>
+
+  {% if summary.transport %}
+    <h3 style="margin-top: 1.2rem;">Transport</h3>
+    <p>{{ summary.transport.type }}
+       {% if summary.transport.carrier %} -- {{ summary.transport.carrier }} {{ summary.transport.flight_number }}{% endif %}
+       -- <strong>${{ "%.2f"|format(summary.transport.fare) }}</strong></p>
+  {% endif %}
+
+  {% if summary.hotel %}
+    <h3 style="margin-top: 1.2rem;">Stay</h3>
+    <p>{{ summary.hotel.name }} ({{ summary.hotel.type }}) -- <strong>${{ "%.2f"|format(summary.hotel.rate_per_night) }}/night</strong></p>
+  {% endif %}
+
+  {% if summary.activities %}
+    <h3 style="margin-top: 1.2rem;">Activities</h3>
+    <ul style="margin-left: 1.3rem;">
+      {% for a in summary.activities %}
+        <li>{{ a.name }} ({{ a.type }}) -- ${{ "%.2f"|format(a.price) }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>
+
+<form method="GET" action="{{ url_for('confirm') }}">
+  <div style="text-align: right; margin-top: 1.6rem;">
+    <a href="{{ url_for('browse') }}" class="btn btn-secondary">Change selection</a>
+    <button type="submit">Continue &rarr;</button>
+  </div>
+</form>
+{% endblock %}
