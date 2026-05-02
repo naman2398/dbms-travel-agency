@@ -70,11 +70,12 @@ def browse():
         FROM   transportation t
         JOIN   location ls ON t.source_location_id      = ls.location_id
         JOIN   location ld ON t.destination_location_id = ld.location_id
-        WHERE  t.destination_location_id = %s
+        WHERE  t.source_location_id      = %s
+        AND    t.destination_location_id = %s
         ORDER BY t.fare ASC
         LIMIT 10;
         """,
-        (s["dest_id"],),
+        (s["source_id"], s["dest_id"]),
     )
     transports = cur.fetchall()
 
@@ -171,7 +172,31 @@ def plan():
     cur.close()
     conn.close()
 
-    return render_template("plan.html", search=session["search"], summary=summary)
+    s = session["search"]
+    nights = (
+        (__import__("datetime").date.fromisoformat(s["end_date"]) -
+         __import__("datetime").date.fromisoformat(s["start_date"])).days
+        or 1
+    )
+    size = s["size"]
+
+    transport_cost = float(summary["transport"]["fare"]) * size if summary["transport"] else 0
+    hotel_cost = (
+        float(summary["hotel"]["rate_per_night"]) *
+        (1 - float(summary["hotel"]["discount_pct"]) / 100) *
+        nights
+        if summary["hotel"] else 0
+    )
+    activity_cost = sum(float(a["price"]) * size for a in summary["activities"])
+    total = round(transport_cost + hotel_cost + activity_cost, 2)
+
+    summary["transport_cost"] = round(transport_cost, 2)
+    summary["hotel_cost"]     = round(hotel_cost, 2)
+    summary["activity_cost"]  = round(activity_cost, 2)
+    summary["total"]          = total
+    summary["nights"]         = nights
+
+    return render_template("plan.html", search=s, summary=summary)
 
 
 @app.route("/confirm", methods=["GET", "POST"])

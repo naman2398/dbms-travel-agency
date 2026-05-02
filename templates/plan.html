@@ -7,27 +7,39 @@
 
   {% if summary.transport %}
     <h3 style="margin-top: 1.2rem;">Transport</h3>
-    <p>{{ summary.transport.type }}
-       {% if summary.transport.carrier %} -- {{ summary.transport.carrier }} {{ summary.transport.flight_number }}{% endif %}
-       -- <strong>${{ "%.2f"|format(summary.transport.fare) }}</strong></p>
+    <div style="display:flex; justify-content:space-between;">
+      <p>{{ summary.transport.type }}{% if summary.transport.carrier %} &mdash; {{ summary.transport.carrier }} {{ summary.transport.flight_number }}{% endif %} &times; {{ search.size }} traveler(s)</p>
+      <p><strong>${{ "%.2f"|format(summary.transport_cost) }}</strong></p>
+    </div>
   {% endif %}
 
   {% if summary.hotel %}
     <h3 style="margin-top: 1.2rem;">Stay</h3>
-    <p>{{ summary.hotel.name }} ({{ summary.hotel.type }}) -- <strong>${{ "%.2f"|format(summary.hotel.rate_per_night) }}/night</strong></p>
+    <div style="display:flex; justify-content:space-between;">
+      <p>{{ summary.hotel.name }} ({{ summary.hotel.type }}) &mdash; ${{ "%.2f"|format(summary.hotel.rate_per_night) }}/night{% if summary.hotel.discount_pct %} &minus; {{ summary.hotel.discount_pct }}% off{% endif %} &times; {{ summary.nights }} night(s)</p>
+      <p><strong>${{ "%.2f"|format(summary.hotel_cost) }}</strong></p>
+    </div>
   {% endif %}
 
   {% if summary.activities %}
     <h3 style="margin-top: 1.2rem;">Activities</h3>
-    <ul style="margin-left: 1.3rem;">
-      {% for a in summary.activities %}
-        <li>{{ a.name }} ({{ a.type }}) -- ${{ "%.2f"|format(a.price) }}</li>
-      {% endfor %}
-    </ul>
+    {% for a in summary.activities %}
+      <div style="display:flex; justify-content:space-between;">
+        <p>{{ a.name }} ({{ a.type }}) &times; {{ search.size }} traveler(s)</p>
+        <p><strong>${{ "%.2f"|format(a.price * search.size) }}</strong></p>
+      </div>
+    {% endfor %}
   {% endif %}
+
+  <hr style="margin: 1.4rem 0; border-color: var(--border);">
+  <div style="display:flex; justify-content:space-between; font-size: 1.1rem;">
+    <span>Total</span>
+    <strong style="color: var(--accent-teal);">${{ "%.2f"|format(summary.total) }}</strong>
+  </div>
 </section>
 
 <form method="GET" action="{{ url_for('confirm') }}">
+  <input type="hidden" name="total" value="{{ summary.total }}">
   <div style="text-align: right; margin-top: 1.6rem;">
     <a href="{{ url_for('browse') }}" class="btn btn-secondary">Change selection</a>
     <button type="submit">Continue &rarr;</button>
